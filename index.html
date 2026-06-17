@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kerken in Hilversum | Vind een kerk in de buurt</title>
+    <meta
+      name="description"
+      content="Een groeiende gids voor protestantse en evangelische kerken in Hilversum. Ontdek vieringen, gemeenschappen, jeugdwerk en buurtactiviteiten."
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-61B3J6M6DD"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-61B3J6M6DD");
+    </script>
+    <link
+      rel="preload"
+      as="image"
+      href="assets/hero.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css?v=20260617-17" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="Hoofdnavigatie">
+      <a class="brand" href="#top" aria-label="Kerken in Hilversum">
+        <span class="brand-mark" aria-hidden="true">KH</span>
+        <span>Kerken in Hilversum</span>
+      </a>
+      <nav class="nav-links" aria-label="Pagina">
+        <a href="#kerken">Kerken</a>
+        <a href="#agenda">Agenda</a>
+        <a class="nav-highlight" href="zomerfeest.html">Zomerfeest</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-image"
+          src="assets/hero.png"
+          alt="Een moderne kerkelijke gemeenschap met mensen van verschillende leeftijden die elkaar ontmoeten in een lichte ruimte."
+        />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Initiatief van lokale kerken</p>
+          <h1 id="hero-title">Kerken in Hilversum</h1>
+          <p class="hero-copy">
+            Geen perfecte mensen, wel plekken om binnen te lopen: voor muziek,
+            stilte, vragen, vriendschap, geloof en iets betekenen voor de stad.
+          </p>
+          <div class="hero-actions" aria-label="Snelle acties">
+            <a class="button primary" href="#kerken">Bezoek een kerk</a>
+            <a class="button secondary" href="#agenda">Wat gebeurt er?</a>
+          </div>
+          <div class="hero-tags" aria-label="Wat je kunt vinden">
+            <span>Geloven</span>
+            <span>Aanbidden</span>
+            <span>Verbinden</span>
+            <span>Helpen</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro band" aria-label="Waarom deze gids">
+        <div class="intro-grid">
+          <div>
+            <p class="section-kicker">Lokale wegwijzer</p>
+            <h2>Vind een plek waar je gewoon kunt aanschuiven.</h2>
+          </div>
+          <p>
+            Deze pagina is een gezamenlijk initiatief van protestantse en
+            evangelische kerken rond Hilversum. Ze helpt inwoners, studenten,
+            gezinnen en nieuwkomers om snel een gemeenschap te vinden en
+            laagdrempelig kennis te maken.
+          </p>
+        </div>
+      </section>
+
+      <section class="belief section" aria-labelledby="belief-title">
+        <div class="belief-content">
+          <div class="belief-text">
+            <p>
+              Wij geloven dat God ons roept om Hem te volgen en elkaar in liefde
+              te dienen. God heeft ons gemaakt en wil een relatie met ons. Wij
+              schieten als mens enorm tekort, maar Jezus is hiervoor naar de
+              aarde gekomen om ons te laten zien wie God is en ervoor te zorgen
+              dat wij vrij met Hem kunnen omgaan.
+            </p>
+            <p>
+              God heeft ons gaven en talenten gegeven om in te zetten voor Zijn
+              koninkrijk. We zijn geroepen in groei en toewijding aan Jezus. God
+              wil dat wij het evangelie door vertellen en mensen laten zien dat
+              Hij van hen houdt. In alles wat wij doen en laten, getuigen wij
+              dat wij niet van onszelf, maar van Hem zijn.
+            </p>
+          </div>
+          <div class="belief-heading">
+            <p class="section-kicker">Waar we voor staan</p>
+            <h2 id="belief-title">
+              Geroepen om God te volgen en elkaar te dienen.
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="kerken"
+        class="directory section"
+        aria-labelledby="churches-title"
+      >
+        <div class="section-heading">
+          <p class="section-kicker">Gids</p>
+          <h2 id="churches-title">Vind wat bij je past</h2>
+          <p>
+            Gebruik een zoekterm of filter om een kerk te vinden die bij je
+            past. Klik op de website van een kerk voor meer informatie over
+            vieringen, activiteiten en contact.
+          </p>
+        </div>
+
+        <div class="toolbar" aria-label="Filters voor kerken">
+          <label class="search-field">
+            <span>Zoeken</span>
+            <input
+              id="search"
+              type="search"
+              placeholder="Naam, wijk of activiteit"
+              autocomplete="off"
+            />
+          </label>
+          <div class="filter-group" aria-label="Traditie">
+            <button
+              class="chip active"
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+            >
+              Alles
+            </button>
+            <button
+              class="chip"
+              type="button"
+              data-filter="protestants"
+              aria-pressed="false"
+            >
+              Protestants
+            </button>
+            <button
+              class="chip"
+              type="button"
+              data-filter="evangelisch"
+              aria-pressed="false"
+            >
+              Evangelisch
+            </button>
+          </div>
+        </div>
+
+        <div class="church-grid" id="churchGrid">
+          <article
+            class="church-card"
+            data-category="protestants"
+            data-search="verbinding schuilhof kompas protestants hilversum wijkgemeente ontmoeting"
+          >
+            <div>
+              <p class="card-label">Protestants</p>
+              <h3>De Verbinding</h3>
+              <p>
+                De Verbinding is een actieve en eigentijdse
+                samenwerkingsgemeente. Zij geloven dat God zich door Jezus
+                Christus verbindt aan mensen en vieren Zijn Liefde in alle
+                veelkleurigheid van de gemeente.
+              </p>
+            </div>
+            <a
+              href="https://www.deverbindinghilversum.nl/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Website bezoeken
+            </a>
+          </article>
+
+          <article
+            class="church-card"
+            data-category="protestants"
+            data-search="grote kerk centrum protestants monument muziek stilte initiatiefnemer"
+          >
+            <div>
+              <p class="card-label">Protestants</p>
+              <h3>Grote Kerk</h3>
+              <p>
+                Wijkgemeente Grote Kerk in Hilversum is een hervormde
+                wijkgemeente binnen de Protestantse Kerk, met een
+                hervormd-gereformeerde signatuur.
+              </p>
+            </div>
+            <a
+              href="https://www.grotekerkhilversum.nl/"
+              target="_blank"
+              rel="noreferrer"
+              >Website bezoeken</a
+            >
+          </article>
+
+          <article
+            class="church-card"
+            data-category="evangelisch"
+            data-search="veg vrije evangelische gemeente hilversum evangelisch initiatiefnemer bijbel ontmoeting"
+          >
+            <div>
+              <p class="card-label">Evangelisch</p>
+              <h3>VEG</h3>
+              <p>
+                VEG staat voor Vrije Evangelische Gemeente. Het woordje vrije
+                wil zeggen dat zij een zelfstandige gemeente zijn, onder leiding
+                van de Bijbel en de Heilige Geest.
+              </p>
+            </div>
+            <a
+              href="https://www.veghilversum.nl/"
+              target="_blank"
+              rel="noreferrer"
+              >Website bezoeken</a
+            >
+          </article>
+
+          <article
+            class="church-card"
+            data-category="evangelisch"
+            data-search="vitamine g hilversum evangelisch initiatiefnemer eigentijds jongeren gemeenschap"
+          >
+            <div>
+              <p class="card-label">Evangelisch</p>
+              <h3>Vitamine G</h3>
+              <p>
+                Vitamine G wil een bloeiende geloofsgemeenschap zijn waar baby's
+                tot en met honderdjarigen de liefde van God op het spoor komen,
+                groeien in toewijding aan Jezus Christus en delen met hun
+                omgeving.
+              </p>
+            </div>
+            <a
+              href="https://www.vitamineg.net/"
+              target="_blank"
+              rel="noreferrer"
+              >Website bezoeken</a
+            >
+          </article>
+
+          <article
+            class="church-card"
+            data-category="protestants"
+            data-search="bethlehemkerk morgensterkerk regenboogkerk hilversum protestants wijkgemeenten kinderen ontmoeting"
+          >
+            <div>
+              <p class="card-label">Protestants</p>
+              <h3>Protestantse gemeente te Hilversum</h3>
+              <p>
+                De Protestantse gemeente te Hilversum bestaat uit drie
+                geloofsgemeenschappen en maakt deel uit van de Protestantse Kerk
+                in Nederland – en zo ook van de wereldwijde kerk.
+              </p>
+            </div>
+            <a
+              href="https://www.pknhilversum.nl/"
+              target="_blank"
+              rel="noreferrer"
+              >Website bezoeken</a
+            >
+          </article>
+
+          <article
+            class="church-card"
+            data-category="protestants"
+            data-search="gereformeerde gemeente hilversum protestants reformatorisch initiatiefnemer eredienst"
+          >
+            <div>
+              <p class="card-label">Protestants</p>
+              <h3>Gereformeerde Gemeente</h3>
+              <p>
+                Reformatorische gemeente met erediensten, geloofsonderwijs en
+                gemeenteleven.
+              </p>
+            </div>
+            <a href="https://www.gergem-hilversum.nl/">Website bezoeken</a>
+          </article>
+
+          <article
+            class="church-card"
+            data-category="evangelisch"
+            data-search="mystery church hilversum evangelisch initiatiefnemer eigentijds worship community"
+          >
+            <div>
+              <p class="card-label">Evangelisch</p>
+              <h3>Mystery Church</h3>
+              <p>
+                Evangelische community met eigentijdse samenkomsten,
+                geloofsgesprek en ruimte om mee te doen.
+              </p>
+            </div>
+            <a href="https://mystery.church/">Website bezoeken</a>
+          </article>
+
+          <article
+            class="church-card"
+            data-category="evangelisch"
+            data-search="celebration church hilversum evangelisch initiatiefnemer worship onderwijs ontmoeting"
+          >
+            <div>
+              <p class="card-label">Evangelisch</p>
+              <h3>Celebration Church</h3>
+              <p>
+                Evangelische kerk met focus op samen vieren, onderwijs, worship
+                en gemeenschap.
+              </p>
+            </div>
+            <a href="https://www.celebrationchurch.nl/">Website bezoeken</a>
+          </article>
+
+          <article
+            class="church-card"
+            data-category="evangelisch"
+            data-search="the garden hilversum evangelisch initiatiefnemer community gebed ontmoeting"
+          >
+            <div>
+              <p class="card-label">Evangelisch</p>
+              <h3>The Garden</h3>
+              <p>
+                Geloofsgemeenschap gericht op ontmoeting, gebed en samen leven
+                vanuit het evangelie.
+              </p>
+            </div>
+            <a href="https://www.icthegarden.com/">Website bezoeken</a>
+          </article>
+
+          <article
+            class="church-card"
+            data-category="protestants"
+            data-search="hervormde gemeente s graveland protestants initiatiefnemer viering gemeenteleven"
+          >
+            <div>
+              <p class="card-label">Protestants</p>
+              <h3>Hervormde Gemeente 's-Graveland</h3>
+              <p>
+                Hervormde gemeente met vieringen, pastoraat en betrokken
+                gemeenteleven in de regio.
+              </p>
+            </div>
+            <a href="https://www.hervormdegemeentesgraveland.nl/"
+              >Website bezoeken</a
+            >
+          </article>
+
+          <article
+            class="church-card"
+            data-category="protestants"
+            data-search="sijpekerk hervormende gemeente loosdrecht protestants viering ontmoeting gemeente"
+          >
+            <div>
+              <p class="card-label">Protestants</p>
+              <h3>Hervormende Gemeente Loosdrecht</h3>
+              <p>
+                Protestantse gemeente met aandacht voor viering, ontmoeting en
+                lokale verbondenheid.
+              </p>
+            </div>
+            <a href="https://sijpekerk.nl/">Website bezoeken</a>
+          </article>
+        </div>
+        <p class="empty-state" id="emptyState" hidden>
+          Geen resultaten. Probeer een andere zoekterm of filter.
+        </p>
+      </section>
+
+      <section
+        id="agenda"
+        class="band section split"
+        aria-labelledby="agenda-title"
+      >
+        <div>
+          <p class="section-kicker">Kom langs</p>
+          <h2 id="agenda-title">Voor meer dan alleen zondag</h2>
+          <p>
+            Veel protestantse en evangelische kerken organiseren doordeweeks
+            activiteiten: maaltijden, concerten, jeugdavonden, gebedsmomenten,
+            cursussen, diaconale hulp en ontmoetingen in de buurt.
+          </p>
+        </div>
+        <div class="feature-list">
+          <div>
+            <strong>Vieringen</strong>
+            <span
+              >Zondagse diensten, gebedsmomenten, avondvieringen en bijzondere
+              feestdagen.</span
+            >
+          </div>
+          <div>
+            <strong>Ontmoeting</strong>
+            <span
+              >Koffie, buurtmaaltijden, gespreksgroepen en praktische
+              steun.</span
+            >
+          </div>
+          <div>
+            <strong>Gezinnen en jongeren</strong>
+            <span
+              >Kindernevendienst, tieneravonden, jongerenwerk en
+              studentencontact.</span
+            >
+          </div>
+          <div>
+            <strong>Zomerfeest</strong>
+            <span
+              >Een interkerkelijk feest voor tieners met ontmoeting, worship,
+              sport, spel en nieuwe vriendschappen.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="meedoen" class="section cta" aria-labelledby="cta-title">
+        <div>
+          <p class="section-kicker">Aanvullen</p>
+          <h2 id="cta-title">Mist er een kerk?</h2>
+          <p>
+            Help de initiatiefnemers compleet en actueel in beeld te brengen.
+            Stuur website, adres, contactpersoon, traditie en een korte
+            omschrijving.
+          </p>
+        </div>
+        <a
+          class="button primary"
+          href="mailto:website@kerkeninhilversum.nl?subject=Kerk%20aanmelden%20voor%20Kerken%20in%20Hilversum"
+        >
+          Gegevens aanvullen
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Kerken in Hilversum · initiatief van lokale protestantse en evangelische
+        kerken
+      </p>
+      <a href="#top">Terug naar boven</a>
+    </footer>
+
+    <script src="script.js?v=20260617-17"></script>
+  </body>
+</html>
