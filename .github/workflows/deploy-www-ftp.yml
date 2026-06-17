@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install FTP client
         run: sudo apt-get update && sudo apt-get install -y lftp
@@ -43,6 +43,7 @@ jobs:
           REMOTE_DIR="${REMOTE_DIR#\'}"
           REMOTE_DIR="${REMOTE_DIR%/}"
 
+          echo "Login to: $FTP_HOST"
           echo "Uploading website files to remote directory: $REMOTE_DIR"
 
           lftp \
