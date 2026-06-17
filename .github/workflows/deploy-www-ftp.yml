@@ -43,6 +43,8 @@ jobs:
           REMOTE_DIR="${REMOTE_DIR#\'}"
           REMOTE_DIR="${REMOTE_DIR%/}"
 
+          echo "Uploading website files to remote directory: $REMOTE_DIR"
+
           lftp \
             -u "$FTP_USERNAME","$FTP_PASSWORD" \
             "$FTP_HOST" \
