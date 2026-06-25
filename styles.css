@@ -20,6 +20,7 @@
 }
 
 html {
+  scroll-padding-top: 58px;
   scroll-behavior: smooth;
 }
 
@@ -748,7 +749,25 @@ p {
   font-size: clamp(3rem, 9vw, 7.5rem);
   font-weight: 800;
   line-height: 0.88;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
+}
+
+.event-date {
+  color: var(--white);
+  font-family: Montserrat, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.35rem, 3vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.event-location {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 24px;
 }
 
 .event-tags span:first-child {
@@ -848,6 +867,10 @@ p {
   align-items: start;
 }
 
+.event-org-panel .volunteer-action {
+  margin-top: clamp(24px, 4vw, 42px);
+}
+
 .event-organization .section-kicker {
   color: var(--accent);
 }
@@ -894,6 +917,20 @@ p {
   font-size: 1.08rem;
 }
 
+.event-signup-grid .signup-meta {
+  color: var(--green);
+  font-family: Montserrat, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+.signup-panel {
+  display: grid;
+  gap: 0;
+}
+
 .signup-form {
   background: var(--white);
   border: 1px solid rgba(221, 227, 229, 0.9);
@@ -929,12 +966,17 @@ p {
 }
 
 .signup-form input {
+  appearance: none;
+  -webkit-appearance: none;
   border: 1px solid var(--line);
   border-radius: 7px;
   color: var(--ink);
   font: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
   min-height: 42px;
   padding: 9px 12px;
+  width: 100%;
 }
 
 .signup-form input:focus {
@@ -946,19 +988,33 @@ p {
 .signup-form fieldset {
   border: 1px solid var(--line);
   border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
   margin: 0;
   padding: 12px 14px;
+}
+
+.signup-form legend {
+  float: left;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .signup-form fieldset label {
   align-items: center;
   display: flex;
   gap: 10px;
+  width: auto;
 }
 
 .signup-form input[type="radio"] {
+  appearance: auto;
+  -webkit-appearance: radio;
   accent-color: var(--pink);
+  flex: 0 0 auto;
   min-height: auto;
+  width: auto;
 }
 
 .signup-form .button {
@@ -992,6 +1048,10 @@ p {
 }
 
 @media (max-width: 900px) {
+  html {
+    scroll-padding-top: 100px;
+  }
+
   .site-header {
     align-items: flex-start;
     flex-direction: column;
@@ -1017,6 +1077,10 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .event-signup-grid {
+    gap: 34px;
+  }
+
   .cta {
     align-items: flex-start;
     flex-direction: column;
@@ -1024,9 +1088,36 @@ p {
 }
 
 @media (max-width: 640px) {
+  .site-header {
+    padding: 12px 16px;
+  }
+
+  .brand {
+    max-width: 100%;
+  }
+
+  .brand > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .nav-links {
-    width: 100%;
-    justify-content: space-between;
+    gap: 14px;
+    justify-content: flex-start;
+    margin-inline: -16px;
+    overflow-x: auto;
+    padding: 2px 16px 5px;
+    scrollbar-width: none;
+    width: calc(100% + 32px);
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
   }
 
   .hero {
@@ -1034,16 +1125,122 @@ p {
   }
 
   .event-hero {
-    min-height: 94vh;
+    min-height: 88vh;
   }
 
-  .hero-content,
-  .event-hero-content {
+  .hero-content {
     padding-bottom: 88px;
+  }
+
+  .event-hero-content {
+    padding: 148px 18px 60px;
+  }
+
+  .event-hero-image {
+    object-position: 58% top;
+  }
+
+  .event-hero-shade {
+    background:
+      linear-gradient(90deg, rgba(7, 27, 47, 0.84), rgba(7, 27, 47, 0.56) 62%, rgba(7, 27, 47, 0.2)),
+      linear-gradient(0deg, rgba(7, 27, 47, 0.56), rgba(7, 27, 47, 0.08) 52%);
   }
 
   h1 {
     font-size: clamp(2.65rem, 16vw, 4rem);
+  }
+
+  #hero-title {
+    font-size: clamp(2.35rem, 13vw, 3.4rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .event-hero h1 {
+    font-size: clamp(2.35rem, 12vw, 3.2rem);
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: clamp(1.85rem, 11vw, 3rem);
+  }
+
+  .event-year {
+    font-size: clamp(3.3rem, 18vw, 5rem);
+    margin-bottom: 8px;
+  }
+
+  .event-date {
+    font-size: clamp(1.15rem, 7vw, 1.75rem);
+    margin-bottom: 8px;
+  }
+
+  .event-location {
+    font-size: 0.98rem;
+    margin-bottom: 18px;
+  }
+
+  .hero-copy {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .hero-tags {
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .hero-tags span {
+    font-size: 0.84rem;
+    padding: 7px 10px;
+  }
+
+  .section,
+  .band {
+    padding: 56px 18px;
+  }
+
+  .event-copy,
+  .belief-text {
+    border-left-width: 4px;
+    font-size: 1rem;
+    padding-left: 16px;
+  }
+
+  .goal-grid article {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .event-signup-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .signup-form {
+    gap: 12px;
+    padding: 22px 16px 18px;
+  }
+
+  .signup-form input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .signup-form fieldset {
+    gap: 10px 18px;
+    padding: 12px;
+  }
+
+  .signup-form fieldset label {
+    min-height: 34px;
+  }
+
+  .event-org-panel .volunteer-action {
+    margin-top: 22px;
   }
 
   .button {
