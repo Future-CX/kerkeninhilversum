@@ -64,6 +64,23 @@ document.addEventListener("DOMContentLoaded", () => {
       status.dataset.status = type;
     }
 
+    function trackSignupEvent(payload, action) {
+      if (typeof window.gtag !== "function") return;
+
+      const eventName =
+        action === "updated"
+          ? "zomerfeest_aanmelding_bijwerken"
+          : "zomerfeest_aanmelding_nieuw";
+
+      window.gtag("event", eventName, {
+        event_category: "Zomerfeest",
+        event_label: action === "updated" ? "Bijwerken" : "Aanmelden",
+        signup_action: action === "updated" ? "bijwerken" : "aanmelden",
+        brings_friend: payload.bringsFriend ? "ja" : "nee",
+        church_or_city_filled: payload.churchOrCity ? "ja" : "nee",
+      });
+    }
+
     function getSignupPayload() {
       const formData = new FormData(signupForm);
       return {
@@ -160,14 +177,15 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           body: JSON.stringify(getSubmissionPayload()),
         });
+        const result = await response.json().catch(() => ({}));
 
         if (!response.ok) {
-          const result = await response.json().catch(() => ({}));
           throw new Error(result.error || "Aanmelden is niet gelukt.");
         }
 
         lastSubmittedPayload = payloadSignature;
         setStatus("Dank je wel, je aanmelding is ontvangen.", "success");
+        trackSignupEvent(payload, result.action);
       } catch (error) {
         setStatus(
           "Aanmelden lukt nu niet. Mail je gegevens naar website@kerkeninhilversum.nl.",

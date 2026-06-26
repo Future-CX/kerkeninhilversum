@@ -73,6 +73,8 @@ health check terug; een `POST` request slaat een aanmelding op in MySQL.
   MySQL-database.
 - Botbescherming op het aanmeldformulier via een verborgen honeypot-veld en
   minimale invultijdcontrole.
+- Google Analytics meet nieuwe aanmeldingen als `zomerfeest_aanmelding_nieuw`
+  en bijgewerkte aanmeldingen als `zomerfeest_aanmelding_bijwerken`.
 - Vrijwilligersknop via mailto in de organisatie-sectie.
 
 ## Styling

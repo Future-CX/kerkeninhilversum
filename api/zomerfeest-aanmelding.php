@@ -66,7 +66,8 @@ try {
         ':friend_name' => $signup['friend_name'],
     ]);
 
-    respond(201, ['ok' => true]);
+    $action = $statement->rowCount() === 1 ? 'created' : 'updated';
+    respond(201, ['ok' => true, 'action' => $action]);
 } catch (Throwable $exception) {
     error_log('Zomerfeest signup failed: ' . $exception->getMessage());
     respond(500, ['error' => 'Aanmelden lukt nu niet.']);
