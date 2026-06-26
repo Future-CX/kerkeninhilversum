@@ -54,12 +54,76 @@ document.addEventListener("DOMContentLoaded", () => {
   if (signupForm) {
     const status = signupForm.querySelector("[data-form-status]");
     const submitButton = signupForm.querySelector("button[type='submit']");
+    const storageKey = "zomerfeestSignupForm";
+    let lastSubmittedPayload = "";
 
     function setStatus(message, type) {
       if (!status) return;
       status.textContent = message;
       status.dataset.status = type;
     }
+
+    function getSignupPayload() {
+      const formData = new FormData(signupForm);
+      return {
+        name: formData.get("name") || "",
+        email: formData.get("email") || "",
+        age: formData.get("age") || "",
+        churchOrCity: formData.get("churchOrCity") || "",
+        bringsFriend: formData.get("bringsFriend") === "true",
+        friendName: formData.get("friendName") || "",
+      };
+    }
+
+    function serializeSignupPayload(payload) {
+      return JSON.stringify(payload);
+    }
+
+    function updateSubmitButtonState() {
+      if (!submitButton || !lastSubmittedPayload) return;
+      submitButton.disabled =
+        serializeSignupPayload(getSignupPayload()) === lastSubmittedPayload;
+    }
+
+    function saveSignupPayload() {
+      try {
+        sessionStorage.setItem(storageKey, JSON.stringify(getSignupPayload()));
+      } catch (error) {
+        // Ignore storage failures; the form can still be submitted normally.
+      }
+    }
+
+    function restoreSignupPayload() {
+      try {
+        const savedPayload = JSON.parse(sessionStorage.getItem(storageKey) || "null");
+        if (!savedPayload) return;
+
+        Object.entries(savedPayload).forEach(([name, value]) => {
+          if (name === "bringsFriend") {
+            const radio = signupForm.querySelector(
+              `[name="bringsFriend"][value="${value ? "true" : "false"}"]`,
+            );
+            if (radio) radio.checked = true;
+            return;
+          }
+
+          const field = signupForm.elements.namedItem(name);
+          if (field) field.value = value;
+        });
+      } catch (error) {
+        sessionStorage.removeItem(storageKey);
+      }
+    }
+
+    restoreSignupPayload();
+    signupForm.addEventListener("input", () => {
+      saveSignupPayload();
+      updateSubmitButtonState();
+    });
+    signupForm.addEventListener("change", () => {
+      saveSignupPayload();
+      updateSubmitButtonState();
+    });
 
     signupForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -68,15 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const formData = new FormData(signupForm);
-      const payload = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        age: formData.get("age"),
-        churchOrCity: formData.get("churchOrCity"),
-        bringsFriend: formData.get("bringsFriend") === "true",
-        friendName: formData.get("friendName"),
-      };
+      const payload = getSignupPayload();
+      const payloadSignature = serializeSignupPayload(payload);
+      saveSignupPayload();
 
       setStatus("Je aanmelding wordt verstuurd...", "pending");
       if (submitButton) submitButton.disabled = true;
@@ -95,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error(result.error || "Aanmelden is niet gelukt.");
         }
 
-        signupForm.reset();
+        lastSubmittedPayload = payloadSignature;
         setStatus("Dank je wel, je aanmelding is ontvangen.", "success");
       } catch (error) {
         setStatus(
@@ -103,7 +161,11 @@ document.addEventListener("DOMContentLoaded", () => {
           "error",
         );
       } finally {
-        if (submitButton) submitButton.disabled = false;
+        if (submitButton) {
+          submitButton.disabled =
+            Boolean(lastSubmittedPayload) &&
+            serializeSignupPayload(getSignupPayload()) === lastSubmittedPayload;
+        }
       }
     });
   }
