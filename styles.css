@@ -1025,8 +1025,11 @@ p {
 }
 
 .signup-form .button:disabled {
+  background: #e6eaee;
+  color: #68727d;
   cursor: wait;
-  opacity: 0.72;
+  box-shadow: none;
+  opacity: 1;
   transform: none;
 }
 
