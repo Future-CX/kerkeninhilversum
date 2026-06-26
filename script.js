@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (signupForm) {
     const status = signupForm.querySelector("[data-form-status]");
     const submitButton = signupForm.querySelector("button[type='submit']");
+    const formStartedAt = signupForm.querySelector("[data-form-started-at]");
     const storageKey = "zomerfeestSignupForm";
     let lastSubmittedPayload = "";
 
@@ -77,6 +78,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function serializeSignupPayload(payload) {
       return JSON.stringify(payload);
+    }
+
+    function getSubmissionPayload() {
+      const formData = new FormData(signupForm);
+      return {
+        ...getSignupPayload(),
+        website: formData.get("website") || "",
+        formStartedAt: formData.get("formStartedAt") || "",
+      };
     }
 
     function updateSubmitButtonState() {
@@ -116,6 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     restoreSignupPayload();
+    if (formStartedAt) {
+      formStartedAt.value = String(Date.now());
+    }
     signupForm.addEventListener("input", () => {
       saveSignupPayload();
       updateSubmitButtonState();
@@ -145,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(getSubmissionPayload()),
         });
 
         if (!response.ok) {

@@ -71,6 +71,8 @@ health check terug; een `POST` request slaat een aanmelding op in MySQL.
 - CSS-only page transition tussen homepage en Zomerfeest via View Transitions.
 - Zomerfeest-aanmeldformulier via `POST api/zomerfeest-aanmelding.php` naar een
   MySQL-database.
+- Botbescherming op het aanmeldformulier via een verborgen honeypot-veld en
+  minimale invultijdcontrole.
 - Vrijwilligersknop via mailto in de organisatie-sectie.
 
 ## Styling

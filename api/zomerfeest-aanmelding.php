@@ -13,13 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(405, ['error' => 'Methode niet toegestaan.']);
 }
 
+$payload = readPayload();
+$botErrors = validateBotProtection($payload);
+if ($botErrors !== []) {
+    respond(400, ['error' => 'Controleer de velden.', 'fields' => $botErrors]);
+}
+
 $configPath = __DIR__ . '/config.php';
 if (!is_file($configPath)) {
     respond(500, ['error' => 'Databaseconfiguratie ontbreekt.']);
 }
 
 $config = require $configPath;
-$payload = readPayload();
 [$signup, $errors] = validateSignup($payload);
 
 if ($errors !== []) {
@@ -77,6 +82,25 @@ function readPayload(): array
     }
 
     return $_POST;
+}
+
+function validateBotProtection(array $payload): array
+{
+    $errors = [];
+    $honeypot = cleanText($payload['website'] ?? '', 240);
+    $startedAt = filter_var($payload['formStartedAt'] ?? null, FILTER_VALIDATE_INT);
+    $now = (int) floor(microtime(true) * 1000);
+
+    if ($honeypot !== '') {
+        $errors['form'] = 'Aanmelding geweigerd.';
+    }
+    if ($startedAt === false || $startedAt <= 0) {
+        $errors['formStartedAt'] = 'Ververs de pagina en probeer opnieuw.';
+    } elseif (($now - $startedAt) < 1200 || ($now - $startedAt) > 86400000) {
+        $errors['formStartedAt'] = 'Ververs de pagina en probeer opnieuw.';
+    }
+
+    return $errors;
 }
 
 function validateSignup(array $payload): array

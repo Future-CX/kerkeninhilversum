@@ -1030,6 +1030,16 @@ p {
   transform: none;
 }
 
+.bot-check {
+  block-size: 1px;
+  clip-path: inset(50%);
+  inline-size: 1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
 .form-status {
   border-radius: 7px;
   font-size: 0.94rem;
