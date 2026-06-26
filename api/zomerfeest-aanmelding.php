@@ -40,10 +40,17 @@ try {
     ]);
 
     $statement = $pdo->prepare(
-        'INSERT INTO zomerfeest_signups
+        'INSERT INTO zomerfeest_signups_2026
             (created_at, name, email, age, church_or_city, brings_friend, friend_name)
          VALUES
-            (UTC_TIMESTAMP(), :name, :email, :age, :church_or_city, :brings_friend, :friend_name)'
+            (UTC_TIMESTAMP(), :name, :email, :age, :church_or_city, :brings_friend, :friend_name)
+         ON DUPLICATE KEY UPDATE
+            created_at = UTC_TIMESTAMP(),
+            name = VALUES(name),
+            age = VALUES(age),
+            church_or_city = VALUES(church_or_city),
+            brings_friend = VALUES(brings_friend),
+            friend_name = VALUES(friend_name)'
     );
     $statement->execute([
         ':name' => $signup['name'],
@@ -54,7 +61,7 @@ try {
         ':friend_name' => $signup['friend_name'],
     ]);
 
-    respond(201, ['ok' => true, 'id' => (int) $pdo->lastInsertId()]);
+    respond(201, ['ok' => true]);
 } catch (Throwable $exception) {
     error_log('Zomerfeest signup failed: ' . $exception->getMessage());
     respond(500, ['error' => 'Aanmelden lukt nu niet.']);
@@ -88,8 +95,8 @@ function validateSignup(array $payload): array
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Vul een geldig e-mailadres in.';
     }
-    if ($age === false || $age < 12 || $age > 16) {
-        $errors['age'] = 'Vul een leeftijd tussen 12 en 16 in.';
+    if ($age === false || $age < 1 || $age > 100) {
+        $errors['age'] = 'Vul een leeftijd tussen 1 en 100 in.';
     }
     if ($bringsFriend && $friendName === '') {
         $errors['friendName'] = 'Vul de naam van je vriend of vriendin in.';

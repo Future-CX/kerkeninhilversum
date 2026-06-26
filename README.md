@@ -34,7 +34,7 @@ Voor het Zomerfeest-aanmeldformulier is PHP met MySQL nodig. Maak op de server
 een eigen database en tabel aan:
 
 ```sql
-CREATE TABLE zomerfeest_signups (
+CREATE TABLE zomerfeest_signups_2026 (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   created_at DATETIME NOT NULL,
   name VARCHAR(120) NOT NULL,
@@ -43,9 +43,20 @@ CREATE TABLE zomerfeest_signups (
   church_or_city VARCHAR(180) NULL,
   brings_friend TINYINT(1) NOT NULL DEFAULT 0,
   friend_name VARCHAR(120) NULL,
-  INDEX idx_zomerfeest_signups_created_at (created_at)
+  UNIQUE KEY uq_zomerfeest_signups_2026_email (email),
+  INDEX idx_zomerfeest_signups_2026_created_at (created_at)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
+
+Als de tabel al bestaat, voeg dan de unieke index apart toe:
+
+```sql
+ALTER TABLE zomerfeest_signups_2026
+  ADD UNIQUE KEY uq_zomerfeest_signups_2026_email (email);
+```
+
+Door deze unieke index overschrijft een nieuwe aanmelding met hetzelfde
+e-mailadres de bestaande aanmelding.
 
 Kopieer daarna `api/config.example.php` naar `api/config.php` op de server en
 vul de databasegegevens in. `api/config.php` staat in `.gitignore` en wordt niet
