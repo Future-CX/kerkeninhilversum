@@ -1,0 +1,7 @@
+<Files "config.php">
+  Require all denied
+</Files>
+
+<FilesMatch "\.(db|db3|sqlite|sqlite3|sql)$">
+  Require all denied
+</FilesMatch>

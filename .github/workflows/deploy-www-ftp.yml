@@ -8,6 +8,7 @@ on:
       - index.html
       - zomerfeest.html
       - .htaccess
+      - api/**
       - assets/**
       - script.js
       - styles.css
@@ -57,6 +58,7 @@ jobs:
               put index.html -o index.html;
               put zomerfeest.html -o zomerfeest.html;
               put .htaccess -o .htaccess;
+              mirror -R -a --exclude-glob config.php api api;
               mirror -R assets assets;
               put script.js -o script.js;
               put styles.css -o styles.css;

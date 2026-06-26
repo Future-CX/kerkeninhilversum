@@ -18,7 +18,8 @@ te ontdekken.
 
 ## Lokaal draaien
 
-Er is geen build step nodig. Start een lokale static server:
+Er is geen build step nodig. Voor alleen statische preview kun je een lokale
+static server starten:
 
 ```sh
 python3 -m http.server 8081
@@ -29,11 +30,36 @@ Open daarna:
 - `http://127.0.0.1:8081/`
 - `http://127.0.0.1:8081/zomerfeest.html`
 
+Voor het Zomerfeest-aanmeldformulier is PHP met MySQL nodig. Maak op de server
+een eigen database en tabel aan:
+
+```sql
+CREATE TABLE zomerfeest_signups (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  created_at DATETIME NOT NULL,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(180) NOT NULL,
+  age TINYINT UNSIGNED NOT NULL,
+  church_or_city VARCHAR(180) NULL,
+  brings_friend TINYINT(1) NOT NULL DEFAULT 0,
+  friend_name VARCHAR(120) NULL,
+  INDEX idx_zomerfeest_signups_created_at (created_at)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Kopieer daarna `api/config.example.php` naar `api/config.php` op de server en
+vul de databasegegevens in. `api/config.php` staat in `.gitignore` en wordt niet
+mee gecommit.
+
+De API staat op `api/zomerfeest-aanmelding.php`. Een `GET` request geeft een
+health check terug; een `POST` request slaat een aanmelding op in MySQL.
+
 ## Functionaliteit
 
 - Kerkengids met zoekveld en filters voor `Protestants` en `Evangelisch`.
 - CSS-only page transition tussen homepage en Zomerfeest via View Transitions.
-- Zomerfeest-aanmeldformulier via `mailto:website@kerkeninhilversum.nl`.
+- Zomerfeest-aanmeldformulier via `POST api/zomerfeest-aanmelding.php` naar een
+  MySQL-database.
 - Vrijwilligersknop via mailto in de organisatie-sectie.
 
 ## Styling
@@ -49,8 +75,8 @@ Hoofdkleuren:
 
 Titels gebruiken `Montserrat` weight `800` via Google Fonts.
 
-Wanneer `styles.css` of `script.js` wijzigt, verhoog de querystring in beide
-HTML-pagina's, bijvoorbeeld:
+Wanneer `styles.css` of `script.js` wijzigt, verhoog de querystring in de
+HTML-pagina's waar het bestand wordt geladen, bijvoorbeeld:
 
 ```html
 styles.css?v=20260617-17
@@ -70,9 +96,13 @@ De workflow uploadt:
 - `index.html`
 - `zomerfeest.html`
 - `.htaccess`
+- `api/`
 - `script.js`
 - `styles.css`
 - `assets/`
+
+Let op: `api/config.php` wordt bewust niet vanuit git geüpload. Plaats dit
+bestand eenmalig op de server of beheer het apart met veilige hostingconfiguratie.
 
 Benodigde GitHub secrets:
 

@@ -1024,6 +1024,45 @@ p {
   margin-top: 4px;
 }
 
+.signup-form .button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
+.form-status {
+  border-radius: 7px;
+  font-size: 0.94rem;
+  font-weight: 750;
+  line-height: 1.45;
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+.form-status:not(:empty) {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+}
+
+.form-status[data-status="pending"] {
+  background: rgba(21, 155, 211, 0.1);
+  border-color: rgba(21, 155, 211, 0.34);
+  color: #07506e;
+}
+
+.form-status[data-status="success"] {
+  background: rgba(19, 122, 87, 0.1);
+  border-color: rgba(19, 122, 87, 0.3);
+  color: #0d5f43;
+}
+
+.form-status[data-status="error"] {
+  background: rgba(191, 47, 47, 0.09);
+  border-color: rgba(191, 47, 47, 0.28);
+  color: #8d2020;
+}
+
 .form-note {
   color: var(--muted);
   font-size: 0.92rem;
