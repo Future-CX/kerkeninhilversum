@@ -215,68 +215,75 @@
               method="post"
               novalidate
             >
-            <div class="bot-check" aria-hidden="true">
+              <div class="bot-check" aria-hidden="true">
+                <label>
+                  <span>Website</span>
+                  <input
+                    name="website"
+                    type="text"
+                    autocomplete="off"
+                    tabindex="-1"
+                  />
+                </label>
+              </div>
+              <input name="formStartedAt" type="hidden" data-form-started-at />
               <label>
-                <span>Website</span>
+                <span>Je naam</span>
+                <input name="name" type="text" autocomplete="name" required />
+              </label>
+              <label>
+                <span>Je E-mailadres</span>
                 <input
-                  name="website"
-                  type="text"
-                  autocomplete="off"
-                  tabindex="-1"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
                 />
               </label>
-            </div>
-            <input name="formStartedAt" type="hidden" data-form-started-at />
-            <label>
-              <span>Je naam</span>
-              <input name="name" type="text" autocomplete="name" required />
-            </label>
-            <label>
-              <span>Je E-mailadres</span>
-              <input name="email" type="email" autocomplete="email" required />
-            </label>
-            <label>
-              <span>Je Leeftijd</span>
-              <input name="age" type="number" min="1" max="100" required />
-            </label>
-            <label>
-              <span>Kerk of plaats</span>
-              <input
-                name="churchOrCity"
-                type="text"
-                placeholder="Bijv. Hilversum of Loosdrecht"
-              />
-            </label>
-            <fieldset>
-              <legend>Neem je een vriend of vriendin mee?</legend>
               <label>
-                <input name="bringsFriend" type="radio" value="true" />
-                <span>Ja</span>
+                <span>Je Leeftijd</span>
+                <input name="age" type="number" min="1" max="100" required />
               </label>
               <label>
-                <input name="bringsFriend" type="radio" value="false" checked />
-                <span>Nee</span>
+                <span>Kerk</span>
+                <input name="churchOrCity" type="text" />
               </label>
-            </fieldset>
-            <label>
-              <span>Naam vriend/vriendin</span>
-              <input
-                name="friendName"
-                type="text"
-                placeholder="Als je iemand meeneemt"
-              />
-            </label>
-            <button class="button primary" type="submit">Aanmelden</button>
-            <p
-              class="form-status"
-              data-form-status
-              role="status"
-              aria-live="polite"
-            ></p>
-            <p class="form-note">
-              Je aanmelding wordt rechtstreeks doorgestuurd naar de organisatie.
-              Lukt het niet? Mail dan naar website@kerkeninhilversum.nl.
-            </p>
+              <fieldset>
+                <legend>Neem je een vriend of vriendin mee?</legend>
+                <label>
+                  <input name="bringsFriend" type="radio" value="true" />
+                  <span>Ja</span>
+                </label>
+                <label>
+                  <input
+                    name="bringsFriend"
+                    type="radio"
+                    value="false"
+                    checked
+                  />
+                  <span>Nee</span>
+                </label>
+              </fieldset>
+              <label>
+                <span>Naam vriend/vriendin</span>
+                <input
+                  name="friendName"
+                  type="text"
+                  placeholder="Als je iemand meeneemt"
+                />
+              </label>
+              <button class="button primary" type="submit">Aanmelden</button>
+              <p
+                class="form-status"
+                data-form-status
+                role="status"
+                aria-live="polite"
+              ></p>
+              <p class="form-note">
+                Je aanmelding wordt rechtstreeks doorgestuurd naar de
+                organisatie. Lukt het niet? Mail dan naar
+                website@kerkeninhilversum.nl.
+              </p>
             </form>
           </div>
         </div>
@@ -311,8 +318,8 @@
             <p>
               Het Zomerfeest kan alleen bestaan doordat mensen uit verschillende
               kerken samen hun tijd, energie en geloof inzetten voor tieners. Op
-              zaterdag 5 september 2026 willen we aan de Oud-Loosdrechtsedijk
-              19 in Loosdrecht jongeren een middag en avond geven waarin ze zich
+              zaterdag 5 september 2026 willen we aan de Oud-Loosdrechtsedijk 19
+              in Loosdrecht jongeren een middag en avond geven waarin ze zich
               gezien voelen, nieuwe vrienden maken, plezier hebben en worden
               aangemoedigd om Jezus te volgen.
             </p>
