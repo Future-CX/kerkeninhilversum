@@ -7,6 +7,7 @@ on:
     paths:
       - index.html
       - zomerfeest.html
+      - zomerfeest-programma.html
       - .htaccess
       - api/**
       - assets/**
@@ -57,6 +58,7 @@ jobs:
               pwd;
               put index.html -o index.html;
               put zomerfeest.html -o zomerfeest.html;
+              put zomerfeest-programma.html -o zomerfeest-programma.html;
               put .htaccess -o .htaccess;
               mirror -R -a --exclude-glob config.php api api;
               mirror -R assets assets;

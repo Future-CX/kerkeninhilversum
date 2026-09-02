@@ -8,6 +8,8 @@ te ontdekken.
 
 - `index.html` - homepage met kerkengids, filters, missie/intro en agenda.
 - `zomerfeest.html` - aparte landingspagina voor het interkerkelijke Zomerfeest.
+- `zomerfeest-programma.html` - mobiele dagpagina met programma, liederen en
+  bijbelteksten.
 
 ## Belangrijke assets
 
@@ -29,6 +31,7 @@ Open daarna:
 
 - `http://127.0.0.1:8081/`
 - `http://127.0.0.1:8081/zomerfeest.html`
+- `http://127.0.0.1:8081/zomerfeest-programma.html`
 
 Voor het Zomerfeest-aanmeldformulier is PHP met MySQL nodig. Maak op de server
 een eigen database en tabel aan:
@@ -110,6 +113,7 @@ De workflow uploadt:
 
 - `index.html`
 - `zomerfeest.html`
+- `zomerfeest-programma.html`
 - `.htaccess`
 - `api/`
 - `script.js`
@@ -130,6 +134,8 @@ Benodigde GitHub secrets:
 
 - Houd kerklinks en teksten actueel in `index.html`.
 - Houd Zomerfeest-informatie actueel in `zomerfeest.html`.
+- Vul het definitieve programma, de liedteksten en bijbelteksten in op
+  `zomerfeest-programma.html`.
 - Controleer na visuele wijzigingen desktop en mobiel op tekstoverlap en
   horizontale overflow.
 - Laat `.env` lokaal; dit bestand hoort niet in deployment.
