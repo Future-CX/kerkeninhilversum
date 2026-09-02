@@ -30,7 +30,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260902-2" />
+    <link rel="stylesheet" href="styles.css?v=20260902-3" />
   </head>
   <body class="festival-page">
     <header class="festival-header">
@@ -49,6 +49,15 @@
           Hier vind je het programma, de liederen en de bijbelteksten van deze
           dag bij elkaar.
         </p>
+        <button
+          class="festival-share-button"
+          type="button"
+          data-open-share
+          aria-haspopup="dialog"
+        >
+          <span aria-hidden="true">↗</span>
+          Deel deze pagina
+        </button>
         <div class="festival-meta" aria-label="Praktische informatie">
           <p>
             <span>Datum</span>
@@ -243,5 +252,98 @@
       <p>Zomerfeest · Kerken in Hilversum</p>
       <a href="#top">Naar boven ↑</a>
     </footer>
+
+    <dialog
+      class="festival-share-dialog"
+      id="festivalShareDialog"
+      aria-labelledby="share-dialog-title"
+    >
+      <div class="festival-share-panel">
+        <button
+          class="festival-share-close"
+          type="button"
+          data-close-share
+          aria-label="Sluiten"
+        >
+          ×
+        </button>
+        <p class="festival-kicker">Samen vieren</p>
+        <h2 id="share-dialog-title">Deel het programma</h2>
+        <p>
+          Laat je vriend of vriendin deze QR-code scannen om de pagina te
+          openen.
+        </p>
+        <img
+          src="assets/qr-code-programma.jpg"
+          width="300"
+          height="300"
+          alt="QR-code naar de programma- en tekstenpagina van het Zomerfeest"
+        />
+        <div class="festival-share-actions">
+          <button type="button" data-native-share>Deel via je telefoon</button>
+          <button type="button" data-copy-share>Kopieer link</button>
+        </div>
+        <p
+          class="festival-share-status"
+          data-share-status
+          role="status"
+          aria-live="polite"
+        ></p>
+      </div>
+    </dialog>
+
+    <script>
+      const shareDialog = document.querySelector("#festivalShareDialog");
+      const openShareButton = document.querySelector("[data-open-share]");
+      const closeShareButton = document.querySelector("[data-close-share]");
+      const nativeShareButton = document.querySelector("[data-native-share]");
+      const copyShareButton = document.querySelector("[data-copy-share]");
+      const shareStatus = document.querySelector("[data-share-status]");
+
+      function getShareUrl() {
+        const url = new URL(window.location.href);
+        url.hash = "";
+        return url.toString();
+      }
+
+      openShareButton.addEventListener("click", () => {
+        shareStatus.textContent = "";
+        shareDialog.showModal();
+      });
+
+      closeShareButton.addEventListener("click", () => shareDialog.close());
+
+      shareDialog.addEventListener("click", (event) => {
+        if (event.target === shareDialog) shareDialog.close();
+      });
+
+      if (navigator.share) {
+        nativeShareButton.addEventListener("click", async () => {
+          try {
+            await navigator.share({
+              title: "Programma Zomerfeest 2026",
+              text: "Bekijk het programma, de liederen en de bijbelteksten van het Zomerfeest.",
+              url: getShareUrl(),
+            });
+          } catch (error) {
+            if (error.name !== "AbortError") {
+              shareStatus.textContent = "Delen is niet gelukt.";
+            }
+          }
+        });
+      } else {
+        nativeShareButton.hidden = true;
+      }
+
+      copyShareButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(getShareUrl());
+          shareStatus.textContent = "Link gekopieerd.";
+        } catch (error) {
+          shareStatus.textContent =
+            "Kopiëren lukt niet. Gebruik de deeloptie van je browser.";
+        }
+      });
+    </script>
   </body>
 </html>
