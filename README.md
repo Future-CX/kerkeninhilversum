@@ -10,6 +10,7 @@ te ontdekken.
 - `zomerfeest.html` - aparte landingspagina voor het interkerkelijke Zomerfeest.
 - `zomerfeest-programma.html` - mobiele dagpagina met programma, liederen en
   bijbelteksten.
+- `emails/zomerfeest-aangemeld.html` - HTML-mail voor aangemelde deelnemers.
 
 ## Belangrijke assets
 
@@ -17,21 +18,6 @@ te ontdekken.
 - `assets/flyer-zomerfeest.jpeg` - flyer/inspiratiebeeld voor Zomerfeest.
 - `assets/zomerfeest-hero.png` - aparte hero image voor de Zomerfeest-pagina.
 - `assets/favicon.svg` - favicon.
-
-## Lokaal draaien
-
-Er is geen build step nodig. Voor alleen statische preview kun je een lokale
-static server starten:
-
-```sh
-python3 -m http.server 8081
-```
-
-Open daarna:
-
-- `http://127.0.0.1:8081/`
-- `http://127.0.0.1:8081/zomerfeest.html`
-- `http://127.0.0.1:8081/zomerfeest-programma.html`
 
 Voor het Zomerfeest-aanmeldformulier is PHP met MySQL nodig. Maak op de server
 een eigen database en tabel aan:
@@ -79,6 +65,77 @@ health check terug; een `POST` request slaat een aanmelding op in MySQL.
 - Google Analytics meet nieuwe aanmeldingen als `zomerfeest_aanmelding_nieuw`
   en bijgewerkte aanmeldingen als `zomerfeest_aanmelding_bijwerken`.
 - Vrijwilligersknop via mailto in de organisatie-sectie.
+- CLI-script voor een eenmalige HTML-mail naar aangemelde deelnemers, met
+  dry-run, testmodus en bescherming tegen dubbel verzenden.
+
+## E-mail naar deelnemers versturen
+
+Het script `scripts/send-zomerfeest-email.php` leest geldige, unieke adressen
+uit `zomerfeest_signups_2026` en verstuurt per deelnemer één afzonderlijke
+HTML-mail. Het kan op de hostingserver of op een lokale machine worden gestart.
+Gebruik lokaal bij voorkeur SMTP. Voeg hiervoor deze instellingen toe aan de
+array in het lokale, genegeerde `api/config.php`:
+
+```php
+'mail_transport' => 'smtp',
+'mail_from' => 'zomerfeest@kerkeninhilversum.nl',
+'mail_from_name' => 'Zomerfeest',
+'mail_reply_to' => 'website@kerkeninhilversum.nl',
+'mail_delay_ms' => 250,
+'smtp_host' => 'smtp.example.nl',
+'smtp_port' => 587,
+'smtp_encryption' => 'tls',
+'smtp_user' => 'zomerfeest@kerkeninhilversum.nl',
+'smtp_password' => 'VUL_HIER_HET_SMTP_WACHTWOORD_IN',
+```
+
+Voor lokaal gebruik moeten ook `db_host`, `db_name`, `db_user` en `db_password`
+in die lokale configuratie naar de online database verwijzen. De databasehost
+moet externe verbindingen vanaf deze machine toestaan. Voer het script vanuit
+de projectmap uit en begin altijd met een dry-run en een testmail:
+
+```sh
+php scripts/send-zomerfeest-email.php
+php scripts/send-zomerfeest-email.php --test=jouw-adres@example.nl
+php scripts/send-zomerfeest-email.php --send
+```
+
+Na een geaccepteerde mail registreert het script de combinatie van campagne en
+e-mailadres in `zomerfeest_email_deliveries`. Daardoor worden die adressen bij
+een volgende `--send` overgeslagen. Gebruik alleen bewust `--send --resend` als
+iedereen de mail opnieuw moet ontvangen. Met bijvoorbeeld `--limit=10` kan een
+kleine batch worden verwerkt.
+
+Het script is alleen via de commandoregel uitvoerbaar en de map `scripts/` is
+ook via `.htaccess` afgeschermd voor webverkeer. Wie op de hosting de lokale
+PHP-mailserver wil gebruiken, kan `mail_transport` op `mail` zetten; de
+SMTP-instellingen zijn dan niet nodig. PHP heeft voor lokaal gebruik de
+extensies `pdo_mysql`, `mbstring` en `openssl` nodig.
+
+### Zonder terminaltoegang
+
+Na deployment is het beveiligde mailingbeheer beschikbaar op:
+
+```text
+https://www.kerkeninhilversum.nl/api/zomerfeest-mailing.php
+```
+
+Voeg op de server aan `api/config.php` ook een uniek wachtwoord van minimaal 16
+tekens toe:
+
+```php
+'mail_admin_password' => 'GEBRUIK_HIER_EEN_LANG_UNIEK_WACHTWOORD',
+'mail_from' => 'zomerfeest@kerkeninhilversum.nl',
+'mail_from_name' => 'Zomerfeest',
+'mail_reply_to' => 'website@kerkeninhilversum.nl',
+'mail_delay_ms' => 250,
+```
+
+De beheerpagina werkt uitsluitend via HTTPS. Na inloggen kan eerst één testmail
+worden verstuurd. De deelnemersmailing gaat daarna in batches van maximaal tien
+adressen om time-outs te vermijden. Alleen succesvol door PHP `mail()`
+geaccepteerde adressen worden geregistreerd als verzonden. E-mailadressen worden
+niet in het dashboard getoond.
 
 ## Styling
 
@@ -97,8 +154,7 @@ Wanneer `styles.css` of `script.js` wijzigt, verhoog de querystring in de
 HTML-pagina's waar het bestand wordt geladen, bijvoorbeeld:
 
 ```html
-styles.css?v=20260617-17
-script.js?v=20260617-17
+styles.css?v=20260617-17 script.js?v=20260617-17
 ```
 
 ## Deployment

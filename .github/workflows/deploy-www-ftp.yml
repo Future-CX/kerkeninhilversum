@@ -11,6 +11,8 @@ on:
       - .htaccess
       - api/**
       - assets/**
+      - emails/**
+      - scripts/**
       - script.js
       - styles.css
   workflow_dispatch:
@@ -62,6 +64,8 @@ jobs:
               put .htaccess -o .htaccess;
               mirror -R -a --exclude-glob config.php api api;
               mirror -R assets assets;
+              mirror -R emails emails;
+              mirror -R scripts scripts;
               put script.js -o script.js;
               put styles.css -o styles.css;
               cls -l;
