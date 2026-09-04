@@ -1429,6 +1429,41 @@ p {
   padding: 20px;
 }
 
+.festival-song-text {
+  border-top: 1px solid rgba(7, 27, 47, 0.12);
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.festival-song-text p,
+.festival-reading-card .festival-song-text p:last-child {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+.festival-song-text p:last-child {
+  margin-bottom: 0;
+}
+
+.festival-song-text strong {
+  color: var(--pink);
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.festival-song-text .festival-song-repeat {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .festival-bible-card {
   background: var(--white);
   border-top-color: var(--cyan);
@@ -1437,6 +1472,30 @@ p {
 
 .festival-bible-card .festival-label {
   color: #08739f;
+}
+
+.festival-bible-quote {
+  border-left: 4px solid var(--cyan);
+  margin: 20px 0 0;
+  padding: 4px 0 4px 16px;
+}
+
+.festival-bible-card .festival-bible-quote p {
+  color: var(--green-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0 0 10px;
+}
+
+.festival-bible-quote cite {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .festival-footer {
